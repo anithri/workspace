@@ -1,0 +1,9 @@
+# Inventory file. most often localhost
+
+[local]
+localhost ansible_connection=local
+
+[remote]
+
+[all]
+localhost
