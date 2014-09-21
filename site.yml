@@ -2,5 +2,5 @@
 - hosts: local
   roles:
     - common
-    - zsh
+    - shell
 

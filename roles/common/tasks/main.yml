@@ -1,2 +1,11 @@
 ---
 # tasks file for common
+- apt: upgrade=dist update_cache=yes cache_valid_time=3600
+  sudo: true
+- apt: name={{ item }} state=latest
+  sudo: true
+  with_items:
+    - curl
+
+
+ 

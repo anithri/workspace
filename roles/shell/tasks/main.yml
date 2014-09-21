@@ -1,0 +1,36 @@
+---
+# tasks file for zsh
+- name: ~/Tools dir
+  file: path={{ tools_path | expanduser }} state=directory
+- name: ~/bin dir
+  file: path={{ bin_path | expanduser }} state=directory
+- name: required apt packages
+  sudo: yes
+  apt: name={{ item }} state=latest
+  with_items:
+    - vim
+    - tmux
+    - zsh
+    - ack-grep
+    - curl
+
+- name: clone antigen.zsh repo
+  git: repo=https://github.com/zsh-users/antigen.git dest={{ tools_path }}/antigen force=no update=no
+
+- name: Clone dotfiles repo
+  git: repo={{ dotfiles_repo }} dest={{ dotfiles_path }} accept_hostkey=yes force=no update=no
+
+- name: link dotfiles
+  file: src={{ item }} dest=~/{{ item | basename }} state=link force=yes
+  with_fileglob:
+    - "{{ dotfiles_path}}/home/*"
+
+- name: link my bin
+  file: src={{ item }} dest=~/bin/{{ item | basename }} state=link force=yes
+  with_fileglob:
+    - "{{ dotfiles_path}}/bin/*}}"
+
+- name: change shell to zsh
+  sudo: yes
+  user: name={{ ansible_user_id }} shell=/usr/bin/zsh  state=present
+

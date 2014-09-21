@@ -1,0 +1,7 @@
+---
+# defaults file for shell
+tools_path: ~/Tools
+bin_path: ~/bin
+dotfiles_repo: git@github.com:anithri/dotfiles.git
+dotfiles_path: "{{ tools_path }}/dotfiles"
+
