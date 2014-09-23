@@ -1,0 +1,10 @@
+---
+- apt: name={{ item }} state=latest
+  sudo: true
+  with_items:
+    - mysql-server
+    - mysql-client
+    - libmysqlclient-dev
+    - postgresql
+    - postgresql-contrib
+    - libpq-dev

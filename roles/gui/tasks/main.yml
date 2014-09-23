@@ -1,0 +1,14 @@
+---
+- apt_repository: repo='ppa:webupd8team/java' state=present update_cache=yes
+  sudo: true
+- apt_repository: repo='ppa:kilian/f.lux' state=present update_cache=yes
+  sudo: true
+
+- apt: name={{ item }} state=latest
+  sudo: true
+  with_items:
+    - guake
+    - remmina-plugin-rdp
+    - terminator
+    - oracle-java7-installer
+    - fluxgui

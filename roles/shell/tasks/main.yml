@@ -20,15 +20,29 @@
 - name: Clone dotfiles repo
   git: repo={{ dotfiles_repo }} dest={{ dotfiles_path }} accept_hostkey=yes force=no update=no
 
-- name: link dotfiles
-  file: src={{ item }} dest=~/{{ item | basename }} state=link force=yes
-  with_fileglob:
-    - "{{ dotfiles_path}}/home/*"
+- name: list dotfiles/home
+  command: ls -A {{ dotfiles_path | expanduser }}/home
+  register: dotfiles
 
-- name: link my bin
-  file: src={{ item }} dest=~/bin/{{ item | basename }} state=link force=yes
-  with_fileglob:
-    - "{{ dotfiles_path}}/bin/*}}"
+- name: list dotfiles/config
+  command: ls -A {{ dotfiles_path | expanduser }}/config
+  register: configfiles 
+
+- name: list dotfiles/bin
+  command: ls -A {{ dotfiles_path | expanduser }}/bin
+  register: binfiles
+
+- name: link dotfiles
+  file: src={{ dotfiles_path | expanduser }}/home/{{ item }} dest=/home/{{ ansible_user_id }}/{{ item }} state=link force=yes
+  with_items: "{{ dotfiles.stdout_lines }}"
+
+- name: link dotfile/bin
+  file: src={{ dotfiles_path | expanduser }}/bin/{{ item }} dest=/home/{{ ansible_user_id }}/bin/{{ item }} state=link force=yes
+  with_items: "{{ binfiles.stdout_lines }}"
+
+- name: link dotfiles/config
+  file: src={{ dotfiles_path | expanduser }}/config/{{ item }} dest=/home/{{ ansible_user_id }}/.config/{{ item }} state=link force=yes
+  with_items: "{{ configfiles.stdout_lines }}"
 
 - name: change shell to zsh
   sudo: yes
