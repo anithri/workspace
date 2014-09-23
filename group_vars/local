@@ -1,2 +1,8 @@
 ---
 tools_dir: '~/Tools'
+# Install 1 or more versions of ruby
+rvm1_rubies:
+  - 'ruby-2.1.2'
+  - 'ruby-2.1.3'
+rvm1_install_flags: '--auto-dotfiles --user-install'
+rvm_install_path: '/home/{{ ansible_user_id }}/.rvm'

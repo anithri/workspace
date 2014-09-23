@@ -3,6 +3,9 @@
   roles:
     - common
     - shell
+    - rvm_io.rvm1-ruby
     - gui
     - db
-
+    - devbox.chrome
+  tasks:
+    - command: rvm @global do gem install bundler rake hub irbtools awesome_print pg mysql2

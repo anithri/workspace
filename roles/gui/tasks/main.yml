@@ -3,7 +3,8 @@
   sudo: true
 - apt_repository: repo='ppa:kilian/f.lux' state=present update_cache=yes
   sudo: true
-
+- apt_repository: repo='ppa:peterlevi/ppa' state=present update_cache=yes
+  sudo: true
 - apt: name={{ item }} state=latest
   sudo: true
   with_items:
@@ -12,3 +13,5 @@
     - terminator
     - oracle-java7-installer
     - fluxgui
+    - variety
+    
