@@ -13,7 +13,8 @@ sudo pip install ansible
 mkdir ~/Tools
 cd ~/Tools
 git clone git@github.com:anithri/workspace
-ansible-galaxy install rvm_io.rvm1-ruby
+sudo ansible-galaxy install rvm_io.rvm1-ruby
+sudo ansible-galaxy install devbox.chrome
 
 ```
 
