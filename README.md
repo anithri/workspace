@@ -16,6 +16,8 @@ git clone git@github.com:anithri/workspace
 sudo ansible-galaxy install rvm_io.rvm1-ruby
 sudo ansible-galaxy install devbox.chrome
 
+cd workspace
+ansible-playbook -i dev site.yml
 ```
 
 
